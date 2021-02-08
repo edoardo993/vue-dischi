@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Ex-dischi-musicali</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+
+        <header>
+            <div class="container">
+                <img src="img/logo.png" alt="logo" />
+            </div>
+        </header>
+
+        <!-- vue-root -->
+        <div id="root">
+
+            <!-- select -->
+            <div class="select">
+                <h3>Filter By Genre</h3>
+                <select v-model="selected">
+                    <option disabled value="">----------</option>
+                    <option>All Genres</option>
+                    <!-- ciclo gli elementi dell'array 'genres' e stampo ogni elemento presente -->
+                    <option v-for="element in genres">{{element}}</option>
+                </select>
+            </div>
+            <!-- end select -->
+
+            <!-- cds container -->
+            <div class="cds-container container">
+
+                <!-- imposto un v-if con tre condizioni, cioè se la select è vuota,
+                oppure se è impostata su 'all genres' oppure se è impostata su un
+                genere presente nella select -->
+                <div class="cd"
+                    v-for="element in albums"
+                    v-if="element.genre===selected || selected==='' || selected==='All Genres'"
+                >
+                    <img :src="element.poster" alt="">
+                    <h3>{{element.title}}</h3>
+                    <span class="author">{{element.author}}</span>
+                    <span class="year">{{element.year}}</span>
+                </div>
+            </div>
+            <!-- end cds container -->
+
+        </div>
+        <!-- end vue-root -->
+
+        <script src="js/script.js" charset="utf-8"></script>
+    </body>
+</html>
